@@ -96,7 +96,7 @@ export function About() {
                 <div>
                   <p className="font-medium">New York Area</p>
                   <p className="text-sm text-muted-foreground">
-                    Open to relocation
+                    NYC preferred · Open to relocation
                   </p>
                 </div>
               </div>
