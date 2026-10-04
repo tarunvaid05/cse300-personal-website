@@ -2,13 +2,32 @@
 
 import { useInView } from "@/hooks/use-in-view";
 import { cn } from "@/lib/utils";
-import { ArrowUpRight, TrendingUp, Shield, Plane, Accessibility } from "lucide-react";
+import { ArrowUpRight, TrendingUp, Shield, Plane, Accessibility, CloudSun } from "lucide-react";
 
-const projects = [
+const projects: {
+  title: string;
+  description: string;
+  impact: string;
+  tech: string[];
+  icon: typeof TrendingUp;
+  featured: boolean;
+  wide?: boolean;
+  link?: string;
+}[] = [
   {
-    title: "Fourier Fund Portfolio Optimizer",
+    title: "Weather Derivatives Trading System",
     description:
-      "Account-based tool suite for 45+ analysts providing efficient frontier, correlation matrix, backtesting, volatility, and interactive visualizations for informed stock picks.",
+      "Streaming LightGBM probabilistic model that combines live weather observations with NBM forecasts to predict daily-high temperature outcomes. Powers automated trading bots for Polymarket US and Kalshi with an automated order management system. Services are deployed with Docker and backed by a persistent SQLite store.",
+    impact: "~15% avg daily profit live · 6 annualized Sharpe in backtests",
+    tech: ["Python", "LightGBM", "WebSockets", "SQLite", "Docker"],
+    icon: CloudSun,
+    featured: true,
+    wide: true,
+  },
+  {
+    title: "Fourier Fund Analytics Suite",
+    description:
+      "Portfolio analytics suite for 45+ analysts spanning efficient-frontier optimization, correlation analysis, backtesting, volatility, and asset allocation, with a backtested Markowitz mean-variance optimizer.",
     impact: "Outperformed S&P 500 by 6.65% over 8 months",
     tech: ["Python", "Next.js", "FastAPI", "PostgreSQL", "SQLAlchemy"],
     icon: TrendingUp,
@@ -18,9 +37,9 @@ const projects = [
   {
     title: "CPA Client Portal",
     description:
-      "Secure, full-stack client portal for a CPA firm serving 40+ clients with role and invite-based access. Implements AES-256-GCM encryption with integrity verification for 800+ documents.",
-    impact: "Serving 40+ active clients",
-    tech: ["ASP.NET Core MVC", "C#", "Azure SQL", "Azure Blob Storage"],
+      "Secure ASP.NET Core client portal for a CPA firm with role-based access, AES-256-GCM encryption, Azure Blob Storage, and document-integrity checks.",
+    impact: "Serving 40+ active users",
+    tech: ["ASP.NET Core", "C#", "Azure SQL", "Azure Blob Storage"],
     icon: Shield,
     featured: true,
     link: "https://github.com/tarunvaid05/CPAClientPortal",
@@ -51,7 +70,7 @@ export function Projects() {
   const { ref, isInView } = useInView({ threshold: 0.1 });
 
   return (
-    <section id="projects" className="py-24 px-6 lg:px-16 bg-card/50">
+    <section id="projects" className="py-16 px-6 lg:px-16 bg-card/50">
       <div className="max-w-5xl mx-auto">
         <div
           ref={ref}
@@ -91,12 +110,12 @@ function ProjectCard({
   return (
     <a
       href={project.link}
-      target="_blank"
-      rel="noopener noreferrer"
+      target={project.link ? "_blank" : undefined}
+      rel={project.link ? "noopener noreferrer" : undefined}
       ref={ref}
       className={cn(
         "group relative bg-background border border-border rounded-xl p-6 transition-all duration-500 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 block",
-        project.featured && "md:col-span-1",
+        project.wide && "md:col-span-2",
         isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       )}
       style={{ transitionDelay: `${index * 100}ms` }}
@@ -105,7 +124,9 @@ function ProjectCard({
         <div className="p-2 bg-primary/10 rounded-lg">
           <Icon className="w-5 h-5 text-primary" />
         </div>
-        <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+        {project.link && (
+          <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+        )}
       </div>
 
       <h3 className="text-lg font-bold mb-2">{project.title}</h3>

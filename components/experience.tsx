@@ -3,47 +3,68 @@
 import { useInView } from "@/hooks/use-in-view";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 const experiences = [
   {
     company: "Amazon",
-    role: "Software Development Engineer Intern",
     location: "New York, NY",
-    period: "Sep 2025 – Nov 2025",
     logo: "/AMZN.png",
-    highlights: [
-      "Engineered automated keyword-generation pipeline using AWS Step Functions, S3, Lambda, and Claude 3.7 to map 250,000+ high-intent queries",
-      "Architected asynchronous validation pipeline to batch-validate 300K+ generated keywords via rule-based filtering",
-      "Built large-scale Scala data pipelines achieving 99.65% revenue coverage from 100M+ search queries",
-      "Drove 105% revenue increase by expanding keyword coverage for Shopping Guides",
+    roles: [
+      {
+        title: "Software Development Engineer Intern – Percolate",
+        period: "Jun 2026 – Aug 2026",
+        highlights: [
+          "Built reusable Airflow/EMR/Spark pipelines populating a separate Glue/Athena analytics layer, enabling observability and conversational analytics while reducing projected storage costs by $35.6K/month",
+          "Automated dataset onboarding with AWS CDK, reducing provisioning to schema/config/DAG changes",
+          "Developed a Spring Boot MCP server with 17 Scala-based tools automating end-to-end regression testing for Spark/Hadoop changes on jobs processing 100s of TB/day, projected to save $36K/year in developer time",
+        ],
+      },
+      {
+        title: "Software Development Engineer Intern – Shopping Guides",
+        period: "Sep 2025 – Nov 2025",
+        highlights: [
+          "Built LLM keyword-generation and validation pipelines with Step Functions, S3, Lambda, Claude 3.7 on Bedrock, and GPT-OSS for 300K+ Shopping Guide keywords from high-intent queries",
+          "Built large-scale Scala pipelines over 100M+ search queries, measuring 99.65% revenue coverage and supporting changes that drove a 105% revenue increase",
+        ],
+      },
     ],
-    tags: ["AWS", "TypeScript", "Python", "Scala", "Claude 3.7"],
+    tags: ["AWS", "Spark", "Airflow", "Scala", "Spring Boot", "MCP", "Bedrock"],
+  },
+  {
+    company: "COMPAS Lab, Stony Brook University",
+    location: "Stony Brook, NY",
+    logo: "/compas.png",
+    logoWide: true,
+    link: "https://compas.cs.stonybrook.edu/",
+    roles: [
+      {
+        title: "Undergraduate Researcher",
+        period: "May 2026 – Present",
+        highlights: [
+          "Building a model-agnostic second-gen MLISA compiler that captures PyTorch graphs and lowers them through a multipass graph-to-C pipeline into hardware-optimized executables while preserving loop/function hierarchy",
+          "Porting the optimized first-gen MLISA operator/runtime stack, whose measured GPU inference matched TorchInductor across four NVIDIA GPUs, into the new compiler",
+        ],
+      },
+    ],
+    tags: ["PyTorch", "C", "ML Compilers", "GPU Inference"],
   },
   {
     company: "Piper Sandler",
-    role: "Equities Trading Technology Intern",
     location: "Greenwich, CT",
-    period: "June 2025 – Aug 2025",
     logo: "/pipersandler.png",
-    highlights: [
-      "Developed .NET automation scripts with Ivanti for patch management, reducing developer on-call time by 16%",
-      "Designed latency-testing algorithm to optimize GigaSpaces in-memory performance for no-touch trading",
-      "Enhanced monitoring by integrating Datadog APIs, reducing system latency by 20% and improving metrics accuracy by 12%",
+    roles: [
+      {
+        title: "Equities Trading Technology Intern",
+        period: "Jun 2025 – Aug 2025",
+        highlights: [
+          "Designed latency-testing infrastructure for GigaSpaces in-memory data grids, benchmarking no-touch equities workflows and reducing on-call investigation time by ~20%",
+          "Integrated Datadog APIs and migrated legacy Perl scripts to PowerShell, reducing system latency by 20% and improving metrics accuracy by 12%",
+        ],
+      },
     ],
     tags: [".NET", "Datadog", "PowerShell", "GigaSpaces"],
-  },
-  {
-    company: "Stony Brook University",
-    role: "Teaching Assistant - Programming Abstractions",
-    location: "Stony Brook, NY",
-    period: "Jan 2025 - May 2025",
-    logo: "/sbu.png",
-    highlights: [
-      "Led weekly recitations for 120+ students on functional programming, polymorphism and parallel programming",
-      "Conducted office hours and graded assignments/exams, providing feedback that improved student performance",
-    ],
-    tags: ["OCaml", "Teaching", "Functional Programming"],
   },
 ];
 
@@ -151,7 +172,7 @@ export function Experience() {
   const { ref, isInView } = useInView({ threshold: 0.1 });
 
   return (
-    <section id="experience" className="py-24 px-6 lg:px-16">
+    <section id="experience" className="py-16 px-6 lg:px-16">
       <div className="max-w-5xl mx-auto">
         <div
           ref={ref}
@@ -182,7 +203,15 @@ function ExperienceCard({
   experience,
   index,
 }: {
-  experience: (typeof experiences)[0];
+  experience: {
+    company: string;
+    location: string;
+    logo: string;
+    logoWide?: boolean;
+    link?: string;
+    roles: { title: string; period: string; highlights: string[] }[];
+    tags: string[];
+  };
   index: number;
 }) {
   const { ref, isInView } = useInView({ threshold: 0.1 });
@@ -209,38 +238,57 @@ function ExperienceCard({
       />
 
       <div className="relative z-10">
-        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
-          <div className="flex items-start gap-4">
-            <div className="relative w-10 h-10 rounded-lg bg-white/90 flex items-center justify-center overflow-hidden shrink-0">
-              <Image
-                src={experience.logo}
-                alt={`${experience.company} logo`}
-                width={40}
-                height={40}
-                className="object-contain p-1.5"
-              />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h3 className="text-xl font-bold">{experience.company}</h3>
-              </div>
-              <p className="text-muted-foreground">{experience.role}</p>
-            </div>
+        <div className="flex items-start gap-4 mb-4">
+          <div
+            className={cn(
+              "relative h-10 rounded-lg bg-white/90 flex items-center justify-center overflow-hidden shrink-0",
+              experience.logoWide ? "w-24" : "w-10"
+            )}
+          >
+            <Image
+              src={experience.logo}
+              alt={`${experience.company} logo`}
+              width={experience.logoWide ? 96 : 40}
+              height={40}
+              className="object-contain p-1.5 w-full h-full"
+            />
           </div>
-          <div className="text-right">
-            <p className="text-sm text-foreground">{experience.period}</p>
-            <p className="text-sm text-muted-foreground">{experience.location}</p>
+          <div className="flex-1 flex flex-col md:flex-row md:items-start md:justify-between gap-1">
+            {experience.link ? (
+              <a
+                href={experience.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group/link inline-flex items-center gap-1 text-xl font-bold hover:text-primary transition-colors"
+              >
+                {experience.company}
+                <ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover/link:text-primary transition-colors" />
+              </a>
+            ) : (
+              <h3 className="text-xl font-bold">{experience.company}</h3>
+            )}
+            <p className="text-sm text-muted-foreground md:text-right">{experience.location}</p>
           </div>
         </div>
 
-        <ul className="space-y-2 mb-6">
-          {experience.highlights.map((highlight, i) => (
-            <li key={i} className="text-muted-foreground text-sm flex gap-3">
-              <span className="text-primary mt-1.5">•</span>
-              <span>{highlight}</span>
-            </li>
+        <div className="space-y-5 mb-6">
+          {experience.roles.map((role) => (
+            <div key={role.title}>
+              <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-1 mb-2">
+                <p className="text-foreground font-medium">{role.title}</p>
+                <p className="text-sm text-foreground shrink-0">{role.period}</p>
+              </div>
+              <ul className="space-y-2">
+                {role.highlights.map((highlight, i) => (
+                  <li key={i} className="text-muted-foreground text-sm flex gap-3">
+                    <span className="text-primary mt-1.5">•</span>
+                    <span>{highlight}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
-        </ul>
+        </div>
 
         <div className="flex flex-wrap gap-2">
           {experience.tags.map((tag) => (

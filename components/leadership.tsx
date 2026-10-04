@@ -13,7 +13,7 @@ const leadership = [
     description:
       "Scaled membership from 60 to 140+ via hackathons and industry-speaker professional development events. Led biweekly workshops on LLM wrappers, ML visualization, and webapp development.",
     logo: "/webdev.png",
-    link: "https://www.instagram.com/sbuwebdev/",
+    link: "/go/webdev",
   },
   {
     organization: "Fourier Fund",
@@ -30,7 +30,7 @@ export function Leadership() {
   const { ref, isInView } = useInView({ threshold: 0.1 });
 
   return (
-    <section id="leadership" className="py-24 px-6 lg:px-16 bg-card/50">
+    <section id="leadership" className="py-16 px-6 lg:px-16 bg-card/50">
       <div className="max-w-5xl mx-auto">
         <div
           ref={ref}

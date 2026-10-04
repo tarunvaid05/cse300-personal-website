@@ -8,59 +8,57 @@ const skillCategories = [
     title: "Languages",
     skills: [
       "Python",
+      "Java",
       "C/C++",
       "C#",
-      "Java",
+      "Scala",
       "SQL",
       "TypeScript",
       "JavaScript",
-      "Scala",
-      "OCaml",
-      "R",
-      "PowerShell",
       "Bash",
-      "PHP",
     ],
   },
   {
     title: "Frameworks & Libraries",
     skills: [
-      "TensorFlow",
       "PyTorch",
+      "LightGBM",
       "scikit-learn",
       "NumPy",
       "pandas",
+      "Spring Boot",
       "FastAPI",
       "SQLAlchemy",
-      "Pydantic",
+      "ASP.NET Core",
       "React",
       "Next.js",
     ],
   },
   {
-    title: "Tools & Platforms",
+    title: "Cloud & Data",
     skills: [
       "AWS",
       "Azure",
-      "GCP",
-      "Docker",
-      "Linux",
-      "PostgreSQL",
-      "Git",
-      "Terraform",
+      "Spark",
+      "Hadoop",
+      "Airflow",
       "Kafka",
       "Redis",
-      "Node.js",
+      "PostgreSQL",
+      "OpenSearch",
+      "Docker",
+      "Linux",
+      "Git",
     ],
   },
   {
-    title: "Concepts",
+    title: "Focus Areas",
     skills: [
-      "Distributed Systems",
-      "RESTful APIs",
-      "Machine Learning",
-      "NLP",
-      "Agile",
+      "ML Compilers",
+      "Distributed Data Pipelines",
+      "LLM Systems & MCP",
+      "Algorithmic Trading",
+      "Low-Latency Systems",
     ],
   },
 ];
@@ -69,7 +67,7 @@ export function Skills() {
   const { ref, isInView } = useInView({ threshold: 0.1 });
 
   return (
-    <section id="skills" className="py-24 px-6 lg:px-16">
+    <section id="skills" className="py-16 px-6 lg:px-16">
       <div className="max-w-5xl mx-auto">
         <div
           ref={ref}

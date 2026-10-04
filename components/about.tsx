@@ -8,7 +8,7 @@ export function About() {
   const { ref, isInView } = useInView({ threshold: 0.1 });
 
   return (
-    <section id="about" className="py-24 px-6 lg:px-16 bg-card/50">
+    <section id="about" className="py-16 px-6 lg:px-16 bg-card/50">
       <div className="max-w-5xl mx-auto">
         <div
           ref={ref}
@@ -31,7 +31,7 @@ export function About() {
             )}
           >
             <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-              I&apos;m currently a junior at{" "}
+              I&apos;m currently a senior at{" "}
               <span className="text-foreground font-medium">
                 Stony Brook University
               </span>
@@ -55,9 +55,12 @@ export function About() {
               understanding how pieces fit together and being able to
               implement what feels intuitive. I love working with{" "}
               <span className="text-foreground font-medium">cutting-edge technology</span>,
-              whether that&apos;s building{" "}
+              whether that&apos;s building an{" "}
+              <span className="text-foreground font-medium">ML compiler</span>{" "}
+              that lowers PyTorch models into hardware-optimized executables
+              at the COMPAS Lab,{" "}
               <span className="text-foreground font-medium">LLM-powered pipelines</span>{" "}
-              at Amazon or optimizing{" "}
+              at Amazon, or optimizing{" "}
               <span className="text-foreground font-medium">no-touch trading</span>{" "}
               on in-memory frameworks at Piper Sandler.
             </p>
@@ -103,15 +106,15 @@ export function About() {
                 <div>
                   <p className="font-medium">Relevant Coursework</p>
                   <p className="text-sm text-muted-foreground">
-                    Software Development, Data Science, ML, Systems, OOP,
-                    Econometrics
+                    Operating Systems, Cloud Computing, Networks, Machine
+                    Learning, Data Science
                   </p>
                 </div>
               </div>
             </div>
 
             <div className="bg-background border border-border rounded-xl p-6">
-              <p className="font-medium mb-3">Beyond the Screen</p>
+              <p className="font-medium mb-3">Hobbies</p>
               <div className="flex flex-wrap gap-3">
                 <span className="flex items-center gap-1.5 px-3 py-1.5 bg-secondary rounded-lg text-sm text-secondary-foreground">
                   <Utensils className="w-3.5 h-3.5 text-primary" />
