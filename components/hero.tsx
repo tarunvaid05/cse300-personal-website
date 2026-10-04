@@ -42,9 +42,6 @@ export function Hero() {
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 text-balance">
               Tarun Vaidhyanathan
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl leading-relaxed mb-2">
-              Large-scale systems. Clean logic. Real impact.
-            </p>
             <p className="text-lg text-muted-foreground max-w-2xl leading-relaxed mb-8">
               CS & Economics at Stony Brook — building at the intersection of{" "}
               <span className="text-foreground font-medium">finance</span> and{" "}
