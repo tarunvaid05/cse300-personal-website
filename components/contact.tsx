@@ -45,8 +45,8 @@ export function Contact() {
             Let&apos;s Connect
           </h2>
           <p className="text-muted-foreground text-lg mb-12 max-w-xl">
-            Interested in fintech, distributed systems, or just want to chat?
-            Feel free to reach out.
+            Whether it&apos;s an opportunity, advice, or just talking about
+            my work and interests, feel free to reach out!
           </p>
         </div>
 
