@@ -59,7 +59,9 @@ export function About() {
               <span className="text-foreground font-medium">ML compiler</span>{" "}
               that lowers PyTorch models into hardware-optimized executables
               at the COMPAS Lab,{" "}
-              <span className="text-foreground font-medium">LLM-powered pipelines</span>{" "}
+              <span className="text-foreground font-medium">
+                LLM-powered and large-scale data pipelines
+              </span>{" "}
               at Amazon, or optimizing{" "}
               <span className="text-foreground font-medium">no-touch trading</span>{" "}
               on in-memory frameworks at Piper Sandler.
