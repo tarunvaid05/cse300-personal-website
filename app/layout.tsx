@@ -8,7 +8,7 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Tarun Vaidhyanathan | Software Engineer',
+  title: 'Tarun Vaidhyanathan | SWE',
   description: 'Software Engineer specializing in distributed systems, fintech, and full-stack development. Amazon & Piper Sandler experience.',
   generator: 'v0.app',
 }
