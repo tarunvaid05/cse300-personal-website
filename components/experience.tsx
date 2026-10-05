@@ -23,6 +23,7 @@ const experiences = [
       },
       {
         title: "Software Development Engineer Intern – Shopping Guides",
+        link: "https://www.aboutamazon.com/news/retail/amazon-ai-shopping-guides-product-research-recommendations",
         period: "Sep 2025 – Nov 2025",
         highlights: [
           "Built LLM keyword-generation and validation pipelines with Step Functions, S3, Lambda, Claude 3.7 on Bedrock, and GPT-OSS for 300K+ Shopping Guide keywords from high-intent queries",
@@ -57,6 +58,7 @@ const experiences = [
     roles: [
       {
         title: "Equities Trading Technology Intern",
+        link: "https://www.pipersandler.com/equities/equity-trading",
         period: "Jun 2025 – Aug 2025",
         highlights: [
           "Designed latency-testing infrastructure for GigaSpaces in-memory data grids, benchmarking no-touch equities workflows and reducing on-call investigation time by ~20%",
@@ -209,7 +211,7 @@ function ExperienceCard({
     logo: string;
     logoWide?: boolean;
     link?: string;
-    roles: { title: string; period: string; highlights: string[] }[];
+    roles: { title: string; period: string; link?: string; highlights: string[] }[];
     tags: string[];
   };
   index: number;
@@ -275,7 +277,19 @@ function ExperienceCard({
           {experience.roles.map((role) => (
             <div key={role.title}>
               <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-1 mb-2">
-                <p className="text-foreground font-medium">{role.title}</p>
+                {role.link ? (
+                  <a
+                    href={role.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group/role inline-flex items-center gap-1 text-foreground font-medium hover:text-primary transition-colors"
+                  >
+                    {role.title}
+                    <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground group-hover/role:text-primary transition-colors" />
+                  </a>
+                ) : (
+                  <p className="text-foreground font-medium">{role.title}</p>
+                )}
                 <p className="text-sm text-foreground shrink-0">{role.period}</p>
               </div>
               <ul className="space-y-2">
