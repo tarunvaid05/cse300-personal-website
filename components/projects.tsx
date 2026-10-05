@@ -14,16 +14,17 @@ const projects: {
   wide?: boolean;
   link?: string;
 }[] = [
-  {
-    title: "Weather Derivatives Trading System",
-    description:
-      "Streaming LightGBM probabilistic model that combines live weather observations with NBM forecasts to predict daily-high temperature outcomes. Powers automated trading bots for Polymarket US and Kalshi with an automated order management system. Services are deployed with Docker and backed by a persistent SQLite store.",
-    impact: "~15% avg daily profit live · 6 annualized Sharpe in backtests",
-    tech: ["Python", "LightGBM", "WebSockets", "SQLite", "Docker"],
-    icon: CloudSun,
-    featured: true,
-    wide: true,
-  },
+  // Weather Derivatives Trading System: hidden for now, uncomment to restore.
+  // {
+  //   title: "Weather Derivatives Trading System",
+  //   description:
+  //     "Streaming LightGBM probabilistic model that combines live weather observations with NBM forecasts to predict daily-high temperature outcomes. Powers automated trading bots for Polymarket US and Kalshi with an automated order management system. Services are deployed with Docker and backed by a persistent SQLite store.",
+  //   impact: "~15% avg daily profit live · 6 annualized Sharpe in backtests",
+  //   tech: ["Python", "LightGBM", "WebSockets", "SQLite", "Docker"],
+  //   icon: CloudSun,
+  //   featured: true,
+  //   wide: true,
+  // },
   {
     title: "Fourier Fund Analytics Suite",
     description:
